@@ -34,7 +34,7 @@ var work = {
                 .append(formattedWorkDescription);
         });
     }
-}
+};
 
 var projects = {
     projects: [
@@ -44,12 +44,12 @@ var projects = {
             description:
             "Desenvolvimento de um aplicativo para reservas de hoteis, visualização de ofertas e recebimento " +
             "de notificações de novas ofertas",
-            images: []
+            images: ["http://lorempixel.com/400/200/"]
         }
     ],
     display: function () {
         projects.projects.forEach(function (project) {
-            var images;
+            var images = "";
 
             project.images.forEach(function (image) {
                 images += HTMLprojectImage.replace("%data%", image);
@@ -63,7 +63,7 @@ var projects = {
                 .append(images);
         });
     }
-}
+};
 
 var bio = {
     name: "Matheus Eugênio dos Santos",
@@ -72,7 +72,6 @@ var bio = {
         mobile: "55 48 988395454",
         email: "teteusantosgd@gmail.com",
         github: "https://github.com/teteusantosgd",
-        twitter: "",
         location: "Florianópolis, SC, Brazil"
     },
     welcomeMessage: "Welcome to my online resume",
@@ -107,7 +106,7 @@ var bio = {
             });
         }
     }
-}
+};
 
 var education = {
     schools: [
@@ -115,11 +114,9 @@ var education = {
             name: "Unicesumar",
             location: "Florianópolis, SC, Brazil",
             degree: "Sistemas para Internet",
-            majors: [
-
-            ],
+            majors: ["n/a"],
             dates: "01/2016 to 07/2016",
-            url: ""
+            url: "https://www.unicesumar.edu.br/"
         }
     ],
     onlineCourses: [
@@ -134,12 +131,21 @@ var education = {
         education.schools.forEach(function (school) {
             $("#education").append(HTMLschoolStart);
 
-            var HTMLschoolNameAndDegree = HTMLschoolName.replace("%data%", school.name) + HTMLschoolDegree.replace("%data%", school.degree);
+            var HTMLschoolNameAndDegree = 
+                HTMLschoolName.replace("%data%", school.name).replace("#", school.url) + 
+                HTMLschoolDegree.replace("%data%", school.degree);
+
+            var HTMLschoolMajorFormatted = "";
+
+            school.majors.forEach(function(major) {
+                HTMLschoolMajorFormatted += HTMLschoolMajor.replace("%data%", major);
+            })
 
             $(".education-entry:last")
                 .append(HTMLschoolNameAndDegree)
                 .append(HTMLschoolDates.replace("%data%", school.dates))
-                .append(HTMLschoolLocation.replace("%data%", school.location));
+                .append(HTMLschoolLocation.replace("%data%", school.location))
+                .append(HTMLschoolMajorFormatted);
         });
 
         $("#education").append(HTMLonlineClasses);
@@ -147,14 +153,17 @@ var education = {
         education.onlineCourses.forEach(function (onlineCourse) {
             $("#education").append(HTMLschoolStart);
 
-            var HTMLschoolTitleAndSchool = HTMLonlineTitle.replace("%data%", onlineCourse.title) + HTMLonlineSchool.replace("%data%", onlineCourse.school);
+            var HTMLschoolTitleAndSchool = 
+                HTMLonlineTitle.replace("%data%", onlineCourse.title).replace("#", onlineCourse.url) + 
+                HTMLonlineSchool.replace("%data%", onlineCourse.school);
+            
             $(".education-entry:last")
                 .append(HTMLschoolTitleAndSchool)
                 .append(HTMLonlineDates.replace("%data%", onlineCourse.dates))
-                .append(HTMLonlineURL.replace("%data%", onlineCourse.url));
+                .append(HTMLonlineURL.replace("%data%", onlineCourse.url).replace("#", onlineCourse.url));
         });
     }
-}
+};
 
 bio.display();
 work.display();
@@ -164,8 +173,6 @@ education.display();
 $(document).click(function (e) {
     logClicks(e.pageX, e.pageY);
 });
-
-// $("#main").append(internationalizeButton);
 
 $("#mapDiv").append(googleMap);
 
