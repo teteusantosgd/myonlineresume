@@ -68,8 +68,6 @@ var projects = {
 var bio = {
     name: "Matheus Eugênio dos Santos",
     role: "Full Stack Developer",
-    welcomeMessage: "Welcome to my online resume",
-    picture: "images/me.jpg",
     contacts: {
         mobile: "55 48 988395454",
         email: "teteusantosgd@gmail.com",
@@ -77,6 +75,7 @@ var bio = {
         twitter: "",
         location: "Florianópolis, SC, Brazil"
     },
+    welcomeMessage: "Welcome to my online resume",
     skills: [
         "HTML5",
         "CSS3",
@@ -86,11 +85,12 @@ var bio = {
         "AngularJS",
         "Ionic 2"
     ],
+    biopic: "images/me.jpg",
     display: function () {
         $("#header")
             .prepend(HTMLheaderRole.replace("%data%", bio.role))
             .prepend(HTMLheaderName.replace("%data%", bio.name))
-            .append(HTMLbioPic.replace("%data%", bio.picture))
+            .append(HTMLbioPic.replace("%data%", bio.biopic))
             .append(HTMLwelcomeMsg.replace("%data%", bio.welcomeMessage));
 
         $("#topContacts, #footerContacts")
@@ -133,9 +133,9 @@ var education = {
     display: function () {
         education.schools.forEach(function (school) {
             $("#education").append(HTMLschoolStart);
-            
-            var HTMLschoolNameAndDegree = HTMLschoolName.replace("%data%", school.name) + HTMLschoolDegree.replace("%data%", school.degree); 
-            
+
+            var HTMLschoolNameAndDegree = HTMLschoolName.replace("%data%", school.name) + HTMLschoolDegree.replace("%data%", school.degree);
+
             $(".education-entry:last")
                 .append(HTMLschoolNameAndDegree)
                 .append(HTMLschoolDates.replace("%data%", school.dates))
@@ -147,7 +147,7 @@ var education = {
         education.onlineCourses.forEach(function (onlineCourse) {
             $("#education").append(HTMLschoolStart);
 
-            var HTMLschoolTitleAndSchool = HTMLonlineTitle.replace("%data%", onlineCourse.title) + HTMLonlineSchool.replace("%data%", onlineCourse.school); 
+            var HTMLschoolTitleAndSchool = HTMLonlineTitle.replace("%data%", onlineCourse.title) + HTMLonlineSchool.replace("%data%", onlineCourse.school);
             $(".education-entry:last")
                 .append(HTMLschoolTitleAndSchool)
                 .append(HTMLonlineDates.replace("%data%", onlineCourse.dates))
@@ -161,7 +161,7 @@ work.display();
 projects.display();
 education.display();
 
-$(document).click(function(e) {
+$(document).click(function (e) {
     logClicks(e.pageX, e.pageY);
 });
 
